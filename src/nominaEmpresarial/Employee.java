@@ -7,11 +7,18 @@ import javax.swing.JOptionPane;
 public class Employee {
 	//EMPLOYEE ATTRIBUTES
 	private String name;
-	private String age;
+	private int age;
 	private double salary;
 	private ArrayList<Double> commissions;
 	
 	//EMPLOYEE METHODS
+	
+	public Employee(String name, int age, double salary, double comisiones) {
+		this.name = name;
+		this.age = age;
+		this.salary = salary;
+		this.commissions = comisiones;
+	}
 	
 	//ADD COMMISSIONS TO CALCULATE TOTALSALARY
 	public void addComissions() {
@@ -46,11 +53,11 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -68,5 +75,11 @@ public class Employee {
 
 	public void setCommissions(ArrayList<Double> commissions) {
 		this.commissions = commissions;
+	}
+	
+	//toString
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", age=" + age + ", salary=" + salary + ", commissions=" + commissions + "]";
 	}
 }
