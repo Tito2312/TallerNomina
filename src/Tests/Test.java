@@ -11,7 +11,7 @@ import org.junit.Test;
 import nominaEmpresarial.Company;
 import nominaEmpresarial.Employee;
 
-class Tests {
+class Tests{
 
 	@Test
     public void datosCompletos() {

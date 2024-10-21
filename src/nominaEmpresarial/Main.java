@@ -169,7 +169,7 @@ public class Main {
 		int age = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del empleado: "));
 		double baseSalary = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el salario base del empleado: "));
 		
-		Employee e1 = new Employee(name, age, baseSalary, null);
+		Employee e1 = new Employee(name, age, baseSalary);
 		ArrayList<Double> commissions = e1.addComissions();
 		e1.setCommissions(commissions);
 		
