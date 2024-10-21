@@ -163,13 +163,13 @@ public class Main {
 		JOptionPane.showMessageDialog(null, "La nomina total de la empresa es igual a: " + company.calculateTotalPayroll());
 	}
 	public static void getEmployeeWithBestSalary() {
-		JOptionPane.showMessageDialog(null, "La nomina total de la empresa es igual a: " + company.getEmployeeWithBestSalary());
+		JOptionPane.showMessageDialog(null, "El empleado con mejor salario es: " + company.getEmployeeWithBestSalary().getName());
 	}
 	public static void getEmployeeWithBestCommissions() {
-		JOptionPane.showMessageDialog(null, "La nomina total de la empresa es igual a: " + company.getEmployeeWithBestCommissions());
+		JOptionPane.showMessageDialog(null, "El empleado con mejores comisiones es: " + company.getEmployeeWithBestCommissions().getName());
 	}
 	public static void calculateAverageSalary() {
-		JOptionPane.showMessageDialog(null, "La nomina total de la empresa es igual a: " + company.calculateAverageSalary());
+		JOptionPane.showMessageDialog(null, "el promedio salarial de la empresa es igual a: " + company.calculateAverageSalary());
 	}
 	public static void listEmployeesBySalaryRange() {
 		

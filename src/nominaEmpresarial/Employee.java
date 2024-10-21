@@ -1,5 +1,6 @@
 package nominaEmpresarial;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ public class Employee {
 	private int age;
 	private double salary;
 	private ArrayList<Double> commissions;
+	private LocalDate entryDate;
 	
 	//EMPLOYEE METHODS
 	
@@ -18,6 +20,7 @@ public class Employee {
 		this.age = age;
 		this.salary = salary;
 		this.commissions = comisiones;
+		this.entryDate = LocalDate.now();
 	}
 	
 	//ADD COMMISSIONS TO CALCULATE TOTALSALARY
@@ -40,11 +43,13 @@ public class Employee {
 	public double calculateTotalSalary() {
 		//double totalCommisions = 0;
 		double newSalary = 0;
+		LocalDate date = LocalDate.now();
+		int years = date.getYear() - this.entryDate.getYear();
 		
 		for (int i = 0; i < this.commissions.size(); i++) {
 			newSalary += this.commissions.get(i);
 		}
-		newSalary += this.salary;
+		newSalary = (newSalary + this.salary)+(years*50000);
 		
 		return newSalary;
 	}
@@ -82,9 +87,9 @@ public class Employee {
 		this.commissions = commissions;
 	}
 	
-	//toString
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", age=" + age + ", salary=" + salary + ", commissions=" + commissions + "]";
+		return "Employee [name=" + name + ", age=" + age + ", salary=" + salary + ", commissions=" + commissions
+				+ ", entryDate=" + entryDate + "]";
 	}
 }

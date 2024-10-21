@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Company {
 	private String name = "EMPRESA DE TITO";
 	private ArrayList<Employee> employeeList;
+	private ArrayList<Department> departmentList;
+	private ArrayList<Proyect> proyectList;
 	
 	public Company(String name) {
 		this.name = name;
@@ -91,29 +93,98 @@ public class Company {
 		return rangeEmployeesList;
 	}
 	
-	public ArrayList<Employee> listEmployeesByDeparment(){
-		
+	public ArrayList<Department> getDepartments(){
+		return this.departmentList;
+	}
+	
+	public void addDepartment(Department department) {
+		this.departmentList.add(department);
+	}
+	
+	public Department getDepartment(String name) {
+		for (Department departamento : this.departmentList) {
+			if(departamento.getName().equalsIgnoreCase(name)) {
+				return departamento;
+			}
+		}
 		return null;
 	}
 	
-	public Deparment getDeparmentWithMoreEmployees() {
-		
-		
+	public void updateDepartment(Department department, String name) {
+		department.setName(name);
+	}
+	
+	public void deleteDepartment(Department department) {
+		this.departmentList.remove(department);
+	}
+	
+	public ArrayList<Employee> listEmployeesByDeparment(Department department){
+		ArrayList<Employee> DepartmentEmployeesList = new ArrayList<>();
+		for (Employee employee : this.employeeList) {
+			DepartmentEmployeesList.add(employee);
+		}
+		return DepartmentEmployeesList;
+	}
+	
+	public Department getDeparmentWithMoreEmployees() {
+		Department deparmentWithMoreEmployees = this.departmentList.get(0);
+		for (Department department : this.departmentList) {
+			if(department.EmployeesNumber()>deparmentWithMoreEmployees.EmployeesNumber()) {
+				deparmentWithMoreEmployees = department;
+			}
+		}
+		return deparmentWithMoreEmployees;
+	}
+	
+	public ArrayList<Department> getProyects(){
+		return this.departmentList;
+	}
+	
+	public void addProyects(Department department) {
+		this.departmentList.add(department);
+	}
+	
+	public Proyect getProyect(String name) {
+		for (Proyect proyect : this.proyectList) {
+			if(proyect.getName().equalsIgnoreCase(name)) {
+				return proyect;
+			}
+		}
 		return null;
 	}
 	
-	public Employee getEmployeeWithPoyect() {
-		return null;
-		
+	public void updateProyect(Proyect proyect, String name, Employee responsible, int duration, double cost) {
+		proyect.setName(name);
+		proyect.setResponsible(responsible);
+		proyect.setDuration(duration);
+		proyect.setCost(cost);
+	}
+	
+	public void deleteProyect(Proyect proyect) {
+		this.proyectList.remove(proyect);
+	}
+	
+	public ArrayList<Employee> listaEmpleadosPorProyecto(Proyect proyect) {
+		return proyect.getEmployeeList();
 	}
 	
 	public Proyect getLongerProyect() {
-		return null;
+		Proyect longerProyect = this.proyectList.get(0);
+		for (Proyect proyect : this.proyectList) {
+			if(proyect.getDuration()>longerProyect.getDuration()) {
+				longerProyect = proyect;
+			}
+		}
+		return longerProyect;
 		
 	}
 	
 	public double getAveragePoryects() {
-		return 0;
+		double costProyect = 0;
+		for (Proyect proyect : this.proyectList) {
+			costProyect+=proyect.getCost();
+		}
+		return costProyect/this.proyectList.size();
 		
 	}
 
