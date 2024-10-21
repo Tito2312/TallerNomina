@@ -140,6 +140,10 @@ public class Company {
 		return deparmentWithMoreEmployees;
 	}
 	
+	public void addEmployeeInDeparment(Department department, Employee employee) {
+		department.addEmployee(employee);
+	}
+	
 	//proyects
 	public ArrayList<Proyect> getProyects(){
 		return this.proyectList;

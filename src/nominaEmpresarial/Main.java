@@ -158,6 +158,31 @@ public class Main {
 			break;
 		}
 	}
+	
+	public static void opcionesDepartamentos(int subMenu) {
+		switch (subMenu) {
+		case 1:
+			getDepartments();
+			break;
+		case 2:
+			addDepartment();
+			break;
+		case 3:
+			updateDepartment();
+			break;
+		case 4:
+			deleteDepartment();
+			break;
+		case 5:
+			listEmployeesByDeparment();
+			break;
+		case 6:
+			addEmployeeInDeparment();
+			break;
+		default:
+			break;
+		}
+	}
 	//METHODS
 	public static void EmployeesList() {
 		System.out.println(company.toString());
@@ -315,4 +340,69 @@ public class Main {
 		}
 	}
 	
+	public static void getDepartments() {
+		System.out.println(company.getDepartments().toString());
+	}
+	
+	public static void addDepartment() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre: ");
+		Department department = new Department(name);
+        company.addDepartment(department);
+	}
+	
+	public static void updateDepartment() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre del departamento: ");
+		Department department = company.getDepartment(name);
+		
+		if(department != null) {
+			name = JOptionPane.showInputDialog("Ingrese el nombre: ");
+			company.updateDepartment(department, name);
+			JOptionPane.showMessageDialog(null, "Departamento actualizado");
+		} else {
+			JOptionPane.showMessageDialog(null, "El departamento no existe");
+		}
+	}
+	
+	public static void deleteDepartment() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre del departamento:");
+		Department department = company.getDepartment(name);
+		
+		if(department != null) {
+			company.deleteDepartment(department);
+			JOptionPane.showMessageDialog(null, "Departamento eliminado con exito");
+		} else {
+			JOptionPane.showMessageDialog(null, "El departamento no existe");
+		}
+	}
+	
+	public static void addEmployeeInDeparment() {
+		String nameD = JOptionPane.showInputDialog("Ingrese el nombre del departamento:");
+		Department department = company.getDepartment(nameD);
+		
+		if(department != null) {
+			String nameE = JOptionPane.showInputDialog("Ingrese el nombre del empleado: ");
+			Employee empleado = company.getEmployee(nameE);
+			
+			if(empleado != null) {
+				company.addEmployeeInDeparment(department, empleado);
+				JOptionPane.showMessageDialog(null, "Empleado agregado con exito");
+			} else {
+				JOptionPane.showMessageDialog(null, "El empleado no existe");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "El departamento no existe");
+		}
+	}
+	
+	public static void listEmployeesByDeparment() {
+		String nameD = JOptionPane.showInputDialog("Ingrese el nombre del departamento:");
+		Department department = company.getDepartment(nameD);
+		
+		if(department != null) {
+			System.out.println(company.listEmployeesByDeparment(department).toString());
+			JOptionPane.showMessageDialog(null, "Departamento: "+nameD+"\n"+company.listEmployeesByDeparment(department).toString());
+		} else {
+			JOptionPane.showMessageDialog(null, "El departamento no existe");
+		}
+	}
 }

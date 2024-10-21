@@ -6,8 +6,12 @@ public class Department {
 	private String name;
 	private ArrayList<Employee> employeeList;
 	
-	
-	
+	public Department(String name) {
+		
+		this.name = name;
+		this.employeeList = new ArrayList<>();
+	}
+
 	public void addEmployee(Employee employee) {
 		this.employeeList.add(employee);
 	}
