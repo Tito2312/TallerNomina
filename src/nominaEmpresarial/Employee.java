@@ -13,7 +13,7 @@ public class Employee {
 	
 	//EMPLOYEE METHODS
 	
-	public Employee(String name, int age, double salary, double comisiones) {
+	public Employee(String name, int age, double salary, ArrayList<Double> comisiones) {
 		this.name = name;
 		this.age = age;
 		this.salary = salary;
@@ -21,23 +21,28 @@ public class Employee {
 	}
 	
 	//ADD COMMISSIONS TO CALCULATE TOTALSALARY
-	public void addComissions() {
-		int quantity = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuantas comisiones tiene el empleado este mes?"));
+	@SuppressWarnings("null")
+	public ArrayList<Double> addComissions() {
+		int quantity = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuantas comisiones tiene al empleado?"));
 		double commision;
+		ArrayList<Double> Ecommissions = new ArrayList<Double>();
 		
 		for (int i = 0; i < quantity; i++) {
-			commision = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de la comision numero "+ i));
-			this.commissions.add(commision);
+			
+			commision = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de la comision numero "+ (i+1)));
+			Ecommissions.add(commision);
 		}
+		
+		return Ecommissions;
 	}
 	
 	//CALCULATING TOTAL SALARY (commissions + base salary)
 	public double calculateTotalSalary() {
-		addComissions();
+		//double totalCommisions = 0;
 		double newSalary = 0;
 		
 		for (int i = 0; i < this.commissions.size(); i++) {
-			newSalary += commissions.get(i);
+			newSalary += this.commissions.get(i);
 		}
 		newSalary += this.salary;
 		

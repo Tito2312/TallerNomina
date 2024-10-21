@@ -14,6 +14,7 @@ public class Company {
 	public void addEmployee(Employee employee) {
 		this.employeeList.add(employee);
 	}
+	
 	public Employee getEmployee(String name) {
 		
 		for (Employee employee : this.employeeList) {
@@ -25,12 +26,9 @@ public class Company {
 		return null;
 	}
 	
-	public void deleteEmployee() {
-		for (Employee employee : this.employeeList) {
-			if(employee.getName().equalsIgnoreCase(name)) {
-				this.employeeList.remove(employee);
-			}
-		}
+	public void deleteEmployee(Employee employee) {
+		this.employeeList.remove(employee);
+		
 	}
 	
 	public void updateEmployee(Employee e, String name, int age, double salary, ArrayList<Double> commissios) {
@@ -84,14 +82,46 @@ public class Company {
 	}
 	
 	public ArrayList<Employee> listEmployeesBySalaryRange(double minSalary, double maxSalary){
-		ArrayList<Employee> listaEmpleadosRango = new ArrayList<>();
+		ArrayList<Employee> rangeEmployeesList = new ArrayList<>();
 		for (Employee employee : this.employeeList) {
 			if(employee.calculateTotalSalary()>minSalary && employee.calculateTotalSalary()<maxSalary) {
-				listaEmpleadosRango.add(employee);
+				rangeEmployeesList.add(employee);
 			}
 		}
-		return listaEmpleadosRango;
+		return rangeEmployeesList;
+	}
+	
+	public ArrayList<Employee> listEmployeesByDeparment(){
+		
+		return null;
+	}
+	
+	public Deparment getDeparmentWithMoreEmployees() {
+		
+		
+		return null;
+	}
+	
+	public Employee getEmployeeWithPoyect() {
+		return null;
+		
+	}
+	
+	public Proyect getLongerProyect() {
+		return null;
+		
+	}
+	
+	public double getAveragePoryects() {
+		return 0;
+		
 	}
 
+	@Override
+	public String toString() {
+		return "Lista de empleados:" + employeeList;
+		
+	}
+	
 	
 }
