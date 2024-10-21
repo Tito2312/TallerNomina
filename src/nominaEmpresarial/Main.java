@@ -19,15 +19,17 @@ public class Main {
 				int opcSubMenu = Integer.parseInt(JOptionPane.showInputDialog(null, getSubMenu(option)));
 				optionsSubMenu(option, opcSubMenu);
 			}
-		} while(option != 3);
+		} while(option != 5);
 	}
 	
 	// MENUS 
 	private static String menu() {
 		String menu = "Ingrese una opcion:\n"
 				+ "1. Empleados.\n"
-				+ "2. Funcionalidades.\n"
-				+ "3. Salir.";
+				+ "2. Departamentos.\n"
+				+ "3. Proyectos.\n"
+				+ "4. Funcionalidades.\n"
+				+ "5. Salir.";
 		return menu;
 	}
 	
@@ -42,12 +44,33 @@ public class Main {
 					+ "5. Volver";
 			break;
 		case 2:
+			subMenu += "1. Lista de departamentos.\n"
+					+ "2. Agregar departamento.\n"
+					+ "3. Actualizar departamento.\n"
+					+ "4. Eliminar departamento.\n"
+					+ "5. Listar empleados por departamento.\n"
+					+ "6. Agregar empleado a departamento.\n"
+					+ "7. Volver";
+			break;
+		case 3:
+			subMenu += "1. Lista de proyectos.\n"
+					+ "2. Agregar proyecto.\n"
+					+ "3. Actualizar proyecto.\n"
+					+ "4. Eliminar proyecto.\n"
+					+ "5. Listar empleados por proyecto.\n"
+					+ "6. Agregar empleado a proyecto.\n"
+					+ "7. Volver";
+			break;
+		case 4:
 			subMenu += "1. Calcular nomina total.\n"
 					+ "2. Empleado con mejor sueldo.\n"
 					+ "3. Empleado con mas comisiones.\n"
 					+ "4. Promedio de salarios.\n"
 					+ "5. Listar empleados por rango de salario.\n"
-					+ "6. Volver.";
+					+ "6. Departamento con mas empleados.\n"
+					+ "7. Proyecto mas largo.\n"
+					+ "8. Promedio de costo de proyectos.\n"
+					+ "9. Volver.";
 			break;
 		default:
 			break;
@@ -89,26 +112,51 @@ public class Main {
 	}
 	
 	public static void functionsOptions(int subMenu) {
-	switch (subMenu) {
-	case 1:
-		calculateTotalPayroll();
-		break;
-	case 2:
-		getEmployeeWithBestSalary();
-		break;
-	case 3:
-		getEmployeeWithBestCommissions();
-		break;
-	case 4:
-		calculateAverageSalary();
-		break;
-	case 5:
-		listEmployeesBySalaryRange();
-		
-		break;
-	default:
-		break;
+		switch (subMenu) {
+		case 1:
+			calculateTotalPayroll();
+			break;
+		case 2:
+			getEmployeeWithBestSalary();
+			break;
+		case 3:
+			getEmployeeWithBestCommissions();
+			break;
+		case 4:
+			calculateAverageSalary();
+			break;
+		case 5:
+			listEmployeesBySalaryRange();
+			
+			break;
+		default:
+			break;
+		}
 	}
+	
+	public static void ProyectsOptions(int subMenu) {
+		switch (subMenu) {
+		case 1:
+			getProyects();
+			break;
+		case 2:
+			addProyects();
+			break;
+		case 3:
+			updateProyect();
+			break;
+		case 4:
+			deleteProyect();
+			break;
+		case 5:
+			ListEmployeesWithProyect();
+			break;
+		case 6:
+			addEmployeeInProyect();
+			break;
+		default:
+			break;
+		}
 	}
 	//METHODS
 	public static void EmployeesList() {
@@ -179,6 +227,92 @@ public class Main {
 		String msg = "La nomina total de la empresa es igual a: " + company.listEmployeesBySalaryRange(minSalary, maxSalary);
 		
 		JOptionPane.showMessageDialog(null, msg);
+	}
+	
+	////////////////////
+	public static void getProyects() {
+		System.out.println(company.getProyects().toString());
+	}
+	
+	public static void addProyects() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre del proyecto: ");
+		int duration = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la duracion en meses: "));
+		double cost = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el costo: "));
+		String responsible = JOptionPane.showInputDialog("Ingrese el nombre del responsable del proyecto: ");
+		Employee employee = company.getEmployee(responsible);
+		
+		if(employee != null) {
+			Proyect p = new Proyect(name, employee, duration, cost);
+	        company.addProyect(null);
+			JOptionPane.showMessageDialog(null, "Proyecto agregado");
+		} else {
+			JOptionPane.showMessageDialog(null, "El responsable no existe");
+		}
+	}
+	
+	public static void updateProyect() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre del proyecto: ");
+		Proyect proyect = company.getProyect(name);
+		
+		if(proyect != null) {
+			String nameP = JOptionPane.showInputDialog("Ingrese el nombre del proyecto: ");
+			int duration = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la duracion en meses: "));
+			double cost = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el costo: "));
+			String responsible = JOptionPane.showInputDialog("Ingrese el nombre del responsable del proyecto: ");
+			Employee employee = company.getEmployee(responsible);
+			
+			if(employee != null) {
+				company.updateProyect(proyect, name, employee, duration, cost);
+				JOptionPane.showMessageDialog(null, "Proyecto actualizado");
+			} else {
+				JOptionPane.showMessageDialog(null, "El responsable no existe");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "El proyecto no existe");
+		}
+	}
+	
+	public static void deleteProyect() {
+		String nombre = JOptionPane.showInputDialog("Ingrese el nombre del proyecto:");
+		Proyect proyect = company.getProyect(nombre);
+		
+		if(proyect != null) {
+			company.deleteProyect(proyect);
+			JOptionPane.showMessageDialog(null, "Proyecto eliminado con exito");
+		} else {
+			JOptionPane.showMessageDialog(null, "El proyecto no existe");
+		}
+	}
+	
+	public static void ListEmployeesWithProyect() {
+		String name = JOptionPane.showInputDialog("Ingrese el nombre del proyecto:");
+		Proyect proyect = company.getProyect(name);
+		
+		if(proyect != null) {
+			String nameE = JOptionPane.showInputDialog("Ingrese el nombre del empleado: ");
+			Employee employee = company.getEmployee(nameE);
+			
+			if(employee != null) {
+				company.addEmployeeinProyect(proyect, employee);
+				JOptionPane.showMessageDialog(null, "Empleado agregado con exito");
+			} else {
+				JOptionPane.showMessageDialog(null, "El empleado no existe");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "El proyecto no existe");
+		}
+	}
+	
+	public static void addEmployeeInProyect() {
+		String nameP = JOptionPane.showInputDialog("Ingrese el nombre del proyecto:");
+		Proyect proyect = company.getProyect(nameP);
+		
+		if(proyect != null) {
+			System.out.println(company.ListEmployeesWithProyect(proyect).toString());
+			JOptionPane.showMessageDialog(null, "Departamento: "+nameP+"\n"+company.ListEmployeesWithProyect(proyect).toString());
+		} else {
+			JOptionPane.showMessageDialog(null, "El proyecto no existe");
+		}
 	}
 	
 }

@@ -15,11 +15,11 @@ public class Employee {
 	
 	//EMPLOYEE METHODS
 	
-	public Employee(String name, int age, double salary, ArrayList<Double> comisiones) {
+	public Employee(String name, int age, double salary) {
 		this.name = name;
 		this.age = age;
 		this.salary = salary;
-		this.commissions = comisiones;
+		this.commissions = new ArrayList<>();
 		this.entryDate = LocalDate.now();
 	}
 	

@@ -17,6 +17,10 @@ public class Company {
 		this.employeeList.add(employee);
 	}
 	
+	public ArrayList<Employee> ListEmployees(){
+		return this.employeeList;
+	}
+	
 	public Employee getEmployee(String name) {
 		
 		for (Employee employee : this.employeeList) {
@@ -136,11 +140,12 @@ public class Company {
 		return deparmentWithMoreEmployees;
 	}
 	
-	public ArrayList<Department> getProyects(){
-		return this.departmentList;
+	//proyects
+	public ArrayList<Proyect> getProyects(){
+		return this.proyectList;
 	}
 	
-	public void addProyects(Department department) {
+	public void addProyect(Department department) {
 		this.departmentList.add(department);
 	}
 	
@@ -164,7 +169,11 @@ public class Company {
 		this.proyectList.remove(proyect);
 	}
 	
-	public ArrayList<Employee> listaEmpleadosPorProyecto(Proyect proyect) {
+	public void addEmployeeinProyect(Proyect proyect, Employee employee) {
+		proyect.addEmployee(employee);
+	}
+	
+	public ArrayList<Employee> ListEmployeesWithProyect(Proyect proyect) {
 		return proyect.getEmployeeList();
 	}
 	
