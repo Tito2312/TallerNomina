@@ -15,7 +15,6 @@ class Tests{
 
 	@Test
     public void datosCompletos() {
-        //LOG.info("Iniciado test datosCompletos");
         Employee empleado = new Employee("Paco", 19, 1000);
 
         assertAll("Empleado",
@@ -23,17 +22,15 @@ class Tests{
         () -> assertEquals(19, empleado.getAge()),
         () -> assertEquals(1000, empleado.getSalary())
         );
-
-        //LOG.info("Finalizando test datosCompletos");
     }
 	
 
 	@Test
     public void datosVacios() {
-        //LOG.info("Inicio test datosVcios");
-		Employee empleado1 = new Employee("Paco", 19, 1000);
+        
+	Employee empleado1 = new Employee("Paco", 19, 1000);
         assertThrows(Throwable.class, () -> new Employee("", 0, 0));
-        //LOG.info("Fin test datosVcios");
+        
     }
 	@Test
     public void agregarEmpleado() {
